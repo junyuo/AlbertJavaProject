@@ -13,7 +13,9 @@ public class UserTest {
     public void testUser() {
         User user = new User.UserBuilder().firstName("Albert").lastName("Kuo")
                 .email("test@gmail.com").build();
-        log.debug("user = " + user.toString());
+        log.debug("FirstName = " + user.getFirstName());
+        log.debug("LastName = " + user.getLastName());
+        log.debug("Email = " + user.getEmail());
         assertNotNull(user);
     }
 
@@ -21,7 +23,9 @@ public class UserTest {
     public void testUser2() {
         User2 user2 = new User2.User2Builder().firstName("Albert").lastName("Kuo")
                 .email("test@gmail.com").build();
-        log.debug("user2 = " + user2.toString());
+        log.debug("FirstName = " + user2.getFirstName());
+        log.debug("LastName = " + user2.getLastName());
+        log.debug("Email = " + user2.getEmail());
         assertNotNull(user2);
     }
 

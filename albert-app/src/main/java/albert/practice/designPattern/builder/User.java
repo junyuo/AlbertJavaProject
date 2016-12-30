@@ -24,11 +24,6 @@ public class User {
         this.email = builder.email;
     }
 
-    @Override
-    public String toString() {
-        return "User [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
-    }
-
     public static class UserBuilder {
         private String firstName;
         private String lastName;

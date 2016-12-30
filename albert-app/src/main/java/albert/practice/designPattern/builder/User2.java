@@ -11,7 +11,6 @@ import lombok.ToString;
  */
 @Builder
 @Getter
-@ToString
 public class User2 {
     
     private String firstName;
