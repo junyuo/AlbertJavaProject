@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import com.google.common.base.Strings;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.ToString;
 
 public class LambdaTest {
