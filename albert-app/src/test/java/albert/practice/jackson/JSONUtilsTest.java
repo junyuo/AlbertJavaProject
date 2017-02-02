@@ -6,8 +6,11 @@ import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.meanbean.test.BeanTester;
 
 import lombok.extern.slf4j.Slf4j;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 @Slf4j
 public class JSONUtilsTest extends JSONUtils {
@@ -33,6 +36,17 @@ public class JSONUtilsTest extends JSONUtils {
         String json = convertObjectToJson(response);
         log.debug("json = " + json);
         assertNotNull(json);
+    }
+    
+    @Test
+    public void testPersonBean() {
+        new BeanTester().testBean(JSONUtils.Response.class);
+    }
+
+    @Test
+    public void testEqualsAndHashcode() {
+        EqualsVerifier.forClass(JSONUtils.Response.class)
+                .suppress(Warning.STRICT_INHERITANCE, Warning.NONFINAL_FIELDS).verify();
     }
     
 }

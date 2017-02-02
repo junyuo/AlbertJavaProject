@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import com.google.common.base.Strings;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 public class LambdaTest {
@@ -32,8 +34,10 @@ public class LambdaTest {
         return Arrays.asList(ben, jules, fiona, matt);
     }
 
+    @Data
     @ToString
     @AllArgsConstructor
+    @NoArgsConstructor
     public static class Person {
         private String name;
         private int age;

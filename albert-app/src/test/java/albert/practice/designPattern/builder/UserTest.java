@@ -3,6 +3,7 @@ package albert.practice.designPattern.builder;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
+import org.meanbean.test.BeanTester;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,6 +28,11 @@ public class UserTest {
         log.debug("LastName = " + user2.getLastName());
         log.debug("Email = " + user2.getEmail());
         assertNotNull(user2);
+    }
+    
+    @Test
+    public void testPersonBean() {
+        new BeanTester().testBean(User2.class);
     }
 
 }

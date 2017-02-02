@@ -1,8 +1,9 @@
 package albert.practice.designPattern.builder;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 /*
  * The @Builder annotation produces complex builder APIs for your classes.
@@ -11,6 +12,8 @@ import lombok.ToString;
  */
 @Builder
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class User2 {
     
     private String firstName;

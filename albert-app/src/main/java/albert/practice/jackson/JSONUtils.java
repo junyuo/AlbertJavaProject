@@ -7,6 +7,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 public class JSONUtils {
 
@@ -33,6 +34,7 @@ public class JSONUtils {
     }
 
     @Data
+    @ToString
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Response {
