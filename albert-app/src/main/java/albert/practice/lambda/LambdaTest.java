@@ -18,27 +18,30 @@ public class LambdaTest {
 
     public static void main(String[] args) {
         LambdaTest test = new LambdaTest();
+        log.debug("initial data = " + test.createData().toString());
         log.debug("filterData = " + test.filterData().toString());
         log.debug("filterDataWithSort = " + test.filterDataWithSort().toString());
     }
 
     public List<Person> filterData() {
         List<Person> people = createData();
-        return people.stream().filter(p -> p.age > 40).filter(p -> !Strings.isNullOrEmpty(p.email))
+        return people.stream().filter(p -> p.age >= 35).filter(p -> !Strings.isNullOrEmpty(p.email))
                 .collect(Collectors.toList());
     }
 
     public List<Person> filterDataWithSort() {
         List<Person> people = createData();
-        return people.stream().filter(p -> p.age > 40).sorted((p1, p2) -> (p1.age - p2.age))
+        return people.stream().filter(p -> p.age >= 35).sorted((p1, p2) -> (p1.age - p2.age))
                 .sorted((p1, p2) -> p2.name.compareTo(p1.name)).collect(Collectors.toList());
     }
 
     public List<Person> createData() {
-        List<Person> people = null;
-        people = Arrays.asList(new Person("Ben", 70, "ben@gmail.com"),
-                new Person("Jules", 30, "jules@gmail.com"), new Person("Fiona", 68, null));
-        return people;
+        Person ben = new Person("Ben Whittaker", 70, "ben@gmail.com");
+        Person jules = new Person("Jules Ostin", 30, "jules@gmail.com");
+        Person fiona = new Person("Fiona Farwell", 68, null);
+        Person matt = new Person("Matt", 35, "matt@gmail.com");
+        
+        return Arrays.asList(ben, jules, fiona, matt);
     }
 
     @Data
