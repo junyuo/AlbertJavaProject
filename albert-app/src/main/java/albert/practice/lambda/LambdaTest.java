@@ -1,7 +1,6 @@
 package albert.practice.lambda;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,19 +8,9 @@ import com.google.common.base.Strings;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class LambdaTest {
-
-    public static void main(String[] args) {
-        LambdaTest test = new LambdaTest();
-        log.debug("initial data = " + test.createData().toString());
-        log.debug("filterData = " + test.filterData().toString());
-        log.debug("filterDataWithSort = " + test.filterDataWithSort().toString());
-    }
 
     public List<Person> filterData() {
         List<Person> people = createData();
@@ -44,11 +33,9 @@ public class LambdaTest {
         return Arrays.asList(ben, jules, fiona, matt);
     }
 
-    @Data
     @ToString
     @AllArgsConstructor
-    @NoArgsConstructor
-    private static class Person {
+    public static class Person {
         private String name;
         private int age;
         private String email;
