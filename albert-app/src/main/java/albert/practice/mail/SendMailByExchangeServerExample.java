@@ -30,6 +30,7 @@ public class SendMailByExchangeServerExample {
             helper.setSubject(params.getSubject());
             helper.setText(params.getContent(), true);
 
+            // add attachment if any
             List<File> attachments = params.getAttachments();
             if (CollectionUtils.isNotEmpty(attachments)) {
                 for (File file : attachments) {
@@ -37,6 +38,7 @@ public class SendMailByExchangeServerExample {
                 }
             }
 
+            // add image if any
             if (params.getImgMap() != null) {
                 for (Map.Entry<String, String> entry : params.getImgMap().entrySet()) {
                     InputStreamSource logo = new ByteArrayResource(
