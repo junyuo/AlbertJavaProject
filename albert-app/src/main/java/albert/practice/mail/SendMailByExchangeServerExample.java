@@ -2,6 +2,7 @@ package albert.practice.mail;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -17,11 +18,13 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class SendMailByExchangeServerExample {
 
     public void sendMail(EmailParams params) {
-        JavaMailSenderImpl sender = getJavaMailSender();
+        JavaMailSenderImpl sender = getGmailSender();
         MimeMessage message = sender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -39,10 +42,10 @@ public class SendMailByExchangeServerExample {
             }
 
             // add image if any
-            if (params.getImgMap() != null) {
-                for (Map.Entry<String, String> entry : params.getImgMap().entrySet()) {
+            if (params.getImgs() != null) {
+                for (Map.Entry<String, InputStream> entry : params.getImgs().entrySet()) {
                     InputStreamSource logo = new ByteArrayResource(
-                            IOUtils.toByteArray(getClass().getResourceAsStream(entry.getValue())));
+                            IOUtils.toByteArray(entry.getValue()));
                     helper.addInline(entry.getKey(), logo, "image/png");
                 }
             }
@@ -75,6 +78,27 @@ public class SendMailByExchangeServerExample {
 
         return sender;
     }
+    
+    private JavaMailSenderImpl getGmailSender(){
+    	 Properties props = new Properties();
+    	 props.put("mail.smtp.starttls.enable", "true");
+
+         // mail server configuration
+         String host = "smtp.gmail.com";
+         int port = 587;
+         String userName = "junyuo";
+         String password = "test";
+
+         JavaMailSenderImpl sender = new JavaMailSenderImpl();
+         sender.setJavaMailProperties(props);
+         sender.setHost(host);
+         sender.setPort(port);
+         sender.setUsername(userName);
+         sender.setPassword(password);
+         sender.setDefaultEncoding("UTF-8");
+
+         return sender;
+    }
 
     @Data
     public static class EmailParams {
@@ -83,7 +107,7 @@ public class SendMailByExchangeServerExample {
         private String subject;
         private String content;
         private List<File> attachments;
-        private Map<String, String> imgMap;
+        private Map<String, InputStream> imgs;
     }
 
     @Data
