@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.MessagingException;
@@ -21,10 +20,10 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class SendMailByExchangeServerExample {
+public class SendMailExample {
 
     public void sendMail(EmailParams params) {
-        JavaMailSenderImpl sender = getGmailSender();
+        JavaMailSenderImpl sender = getJavaMailSender();
         MimeMessage message = sender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -42,13 +41,20 @@ public class SendMailByExchangeServerExample {
             }
 
             // add image if any
-            if (params.getImgs() != null) {
-                for (Map.Entry<String, InputStream> entry : params.getImgs().entrySet()) {
+            if(CollectionUtils.isNotEmpty(params.getImgs())) {
+                for(ImgParams img : params.getImgs()) {
                     InputStreamSource logo = new ByteArrayResource(
-                            IOUtils.toByteArray(entry.getValue()));
-                    helper.addInline(entry.getKey(), logo, "image/png");
+                            IOUtils.toByteArray(img.getFileInputStream()));
+                    helper.addInline(img.getFileName(), logo, img.getContentType().getContentType());
                 }
             }
+//            if (params.getImgs() != null) {
+//                for (Map.Entry<String, InputStream> entry : params.getImgs().entrySet()) {
+//                    InputStreamSource logo = new ByteArrayResource(
+//                            IOUtils.toByteArray(entry.getValue()));
+//                    helper.addInline(entry.getKey(), logo, "image/png");
+//                }
+//            }
 
         } catch (MessagingException | IOException e) {
             e.printStackTrace();
@@ -63,7 +69,7 @@ public class SendMailByExchangeServerExample {
         props.put("mail.smtp.ssl.trust", "*");
 
         // mail server configuration
-        String host = "test.test.com.tw";
+        String host = "email.cht.com.tw";
         int port = 25;
         String userName = "test";
         String password = "test";
@@ -107,7 +113,14 @@ public class SendMailByExchangeServerExample {
         private String subject;
         private String content;
         private List<File> attachments;
-        private Map<String, InputStream> imgs;
+        private List<ImgParams> imgs;
+    }
+    
+    @Data
+    public static class ImgParams {
+        private String fileName;
+        private InputStream fileInputStream;
+        private ContentTypeEnum contentType;
     }
 
     @Data

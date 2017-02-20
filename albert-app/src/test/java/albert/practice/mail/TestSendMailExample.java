@@ -2,7 +2,6 @@ package albert.practice.mail;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,37 +15,42 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
-import lombok.extern.slf4j.Slf4j;
+import albert.practice.mail.SendMailExample.ImgParams;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
-@Slf4j
-public class TestSendMailByExchangeServerExample {
+public class TestSendMailExample {
 
-	private SendMailByExchangeServerExample.EmailParams params = null;
-	private SendMailByExchangeServerExample.Customer customer = null;
-	private SendMailByExchangeServerExample sendMailService;
+	private SendMailExample.EmailParams params = null;
+	private SendMailExample.Customer customer = null;
+	private SendMailExample sendMailService;
 
 	@Before
 	public void setup() throws IOException {
 		
-		String imgPath = "/Users/albert/git/AlbertJavaProject/albert-app/src/main/java/albert/practice/mail/img/";
+		String imgPath = "C:/Users/albert/Desktop/picpick/";
 		
-		params = new SendMailByExchangeServerExample.EmailParams();
-		params.setSender("junyuo@gmail.com");
-		params.setReceiver("junyuo@gmail.com");
+		params = new SendMailExample.EmailParams();
+		params.setSender("test@cht.com.tw");
+		params.setReceiver("test@cht.com.tw");
 		params.setSubject("電子郵件測試 (Email test)");
 		params.setAttachments(
-				Arrays.asList(new File("/Users/albert/Dropbox/test_測試.pdf"),
-						new File("/Users/albert/Dropbox/Getting Started.pdf")));
+				Arrays.asList(new File("D:/dropbox/test_測試.pdf"),
+						new File("D:/dropbox/Getting Started.pdf")));
 		
-		Map<String, InputStream> imgs = new HashMap<>();
-		imgs.put("Chansey", FileUtils.openInputStream(new File(imgPath+"Chansey.png")));
-		imgs.put("Hitmonchan", FileUtils.openInputStream(new File(imgPath+"Hitmonchan.png")));
-		imgs.put("Pikachu", FileUtils.openInputStream(new File(imgPath+"Pikachu.png")));
-		params.setImgs(imgs);
+		SendMailExample.ImgParams chansey = new ImgParams();
+		chansey.setFileName("Chansey");
+		chansey.setFileInputStream(FileUtils.openInputStream(new File(imgPath+"Chansey.png")));
+		chansey.setContentType(ContentTypeEnum.PNG);
 		
-		customer = new SendMailByExchangeServerExample.Customer();
+		SendMailExample.ImgParams panda = new ImgParams();
+		panda.setFileName("Panda");
+		panda.setFileInputStream(FileUtils.openInputStream(new File(imgPath+"0.panda2.png")));
+        panda.setContentType(ContentTypeEnum.PNG);
+		
+		params.setImgs(Arrays.asList(chansey, panda));
+		
+		customer = new SendMailExample.Customer();
 		customer.setPolicyNumber("12345678");
 		customer.setName("陳小明");
 		customer.setApplyDate("20170201");
@@ -54,7 +58,7 @@ public class TestSendMailByExchangeServerExample {
 		customer.setToDate("20160410");
 		customer.setPlace("日本關西");
 
-		sendMailService = new SendMailByExchangeServerExample();
+		sendMailService = new SendMailExample();
 	}
 
 	@Test
@@ -81,26 +85,39 @@ public class TestSendMailByExchangeServerExample {
 	@Test
 	public void testEmailParamsBean() {
 		new BeanTester()
-				.testBean(SendMailByExchangeServerExample.EmailParams.class);
+				.testBean(SendMailExample.EmailParams.class);
+	}
+	
+	@Test
+	public void testImgParamsBean() {
+	    new BeanTester().testBean(SendMailExample.ImgParams.class);
 	}
 
 	@Test
 	public void testCustomerBean() {
 		new BeanTester()
-				.testBean(SendMailByExchangeServerExample.Customer.class);
+				.testBean(SendMailExample.Customer.class);
 	}
 
 	@Test
-	public void testEmailParamsBeanEqualsAndHashcode() {
+	public void testImgParamsBeanEqualsAndHashcode() {
 		EqualsVerifier
-				.forClass(SendMailByExchangeServerExample.EmailParams.class)
+				.forClass(SendMailExample.ImgParams.class)
 				.suppress(Warning.STRICT_INHERITANCE, Warning.NONFINAL_FIELDS)
 				.verify();
 	}
+	
+	@Test
+    public void testEmailParamsBeanEqualsAndHashcode() {
+        EqualsVerifier
+                .forClass(SendMailExample.EmailParams.class)
+                .suppress(Warning.STRICT_INHERITANCE, Warning.NONFINAL_FIELDS)
+                .verify();
+    }
 
 	@Test
 	public void testCustomerBeanEqualsAndHashcode() {
-		EqualsVerifier.forClass(SendMailByExchangeServerExample.Customer.class)
+		EqualsVerifier.forClass(SendMailExample.Customer.class)
 				.suppress(Warning.STRICT_INHERITANCE, Warning.NONFINAL_FIELDS)
 				.verify();
 	}
