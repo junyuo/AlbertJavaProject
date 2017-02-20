@@ -16,7 +16,12 @@ import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
+import com.google.common.base.Strings;
+
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -41,20 +46,14 @@ public class SendMailExample {
             }
 
             // add image if any
-            if(CollectionUtils.isNotEmpty(params.getImgs())) {
-                for(ImgParams img : params.getImgs()) {
+            if (CollectionUtils.isNotEmpty(params.getImgs())) {
+                for (EmailImgParams img : params.getImgs()) {
                     InputStreamSource logo = new ByteArrayResource(
                             IOUtils.toByteArray(img.getFileInputStream()));
-                    helper.addInline(img.getFileName(), logo, img.getContentType().getContentType());
+                    helper.addInline(img.getFileName(), logo,
+                            img.getContentType().getContentType());
                 }
             }
-//            if (params.getImgs() != null) {
-//                for (Map.Entry<String, InputStream> entry : params.getImgs().entrySet()) {
-//                    InputStreamSource logo = new ByteArrayResource(
-//                            IOUtils.toByteArray(entry.getValue()));
-//                    helper.addInline(entry.getKey(), logo, "image/png");
-//                }
-//            }
 
         } catch (MessagingException | IOException e) {
             e.printStackTrace();
@@ -84,26 +83,26 @@ public class SendMailExample {
 
         return sender;
     }
-    
-    private JavaMailSenderImpl getGmailSender(){
-    	 Properties props = new Properties();
-    	 props.put("mail.smtp.starttls.enable", "true");
 
-         // mail server configuration
-         String host = "smtp.gmail.com";
-         int port = 587;
-         String userName = "junyuo";
-         String password = "test";
+    private JavaMailSenderImpl getGmailSender() {
+        Properties props = new Properties();
+        props.put("mail.smtp.starttls.enable", "true");
 
-         JavaMailSenderImpl sender = new JavaMailSenderImpl();
-         sender.setJavaMailProperties(props);
-         sender.setHost(host);
-         sender.setPort(port);
-         sender.setUsername(userName);
-         sender.setPassword(password);
-         sender.setDefaultEncoding("UTF-8");
+        // mail server configuration
+        String host = "smtp.gmail.com";
+        int port = 587;
+        String userName = "junyuo";
+        String password = "test";
 
-         return sender;
+        JavaMailSenderImpl sender = new JavaMailSenderImpl();
+        sender.setJavaMailProperties(props);
+        sender.setHost(host);
+        sender.setPort(port);
+        sender.setUsername(userName);
+        sender.setPassword(password);
+        sender.setDefaultEncoding("UTF-8");
+
+        return sender;
     }
 
     @Data
@@ -113,14 +112,57 @@ public class SendMailExample {
         private String subject;
         private String content;
         private List<File> attachments;
-        private List<ImgParams> imgs;
+        private List<EmailImgParams> imgs;
     }
-    
-    @Data
-    public static class ImgParams {
-        private String fileName;
-        private InputStream fileInputStream;
-        private ContentTypeEnum contentType;
+
+    @NoArgsConstructor
+    public static class EmailImgParams {
+        @Getter @Setter private String fileName;
+        @Getter @Setter private InputStream fileInputStream;
+        @Getter @Setter private ContentTypeEnum contentType;
+        
+        private EmailImgParams(EmailImgParamBuilder builder) {
+            this.fileName = builder.fileName;
+            this.fileInputStream = builder.fileInputStream;
+            this.contentType = builder.contentType;
+        }
+
+        public static class EmailImgParamBuilder {
+            private String fileName;
+            private InputStream fileInputStream;
+            private ContentTypeEnum contentType;
+
+            public EmailImgParamBuilder fileName(String fileName) {
+                this.fileName = fileName;
+                return this;
+            }
+
+            public EmailImgParamBuilder fileInputStream(InputStream fileInputStream) {
+                this.fileInputStream = fileInputStream;
+                return this;
+            }
+
+            public EmailImgParamBuilder contentType(ContentTypeEnum contentType) {
+                this.contentType = contentType;
+                return this;
+            }
+            
+            public EmailImgParams build() {
+                EmailImgParams emailImgParams = new EmailImgParams(this);
+                if(Strings.isNullOrEmpty(emailImgParams.getFileName())) {
+                    throw new RuntimeException("file name cannot be null !");
+                }
+                
+                if(emailImgParams.getFileInputStream() == null) {
+                    throw new RuntimeException("file inputStream cannot be null !");
+                }
+                
+                if(emailImgParams.getContentType() == null) {
+                    throw new RuntimeException("content type cannot be null !");
+                }
+                return emailImgParams;
+            }
+        }
     }
 
     @Data
