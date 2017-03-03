@@ -15,7 +15,7 @@ public class LambdaTestExample2 {
                 .forEach(user -> sendMessage("Happy birthday, ", user));
     }
 
-    private static void sendMessage(String message, User user) {
+    private void sendMessage(String message, User user) {
         log.debug(message.concat(user.getUsername()));
     }
 
