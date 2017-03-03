@@ -1,5 +1,7 @@
 package albert.practice.designPattern.simpleFactory;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 public class TestSimpleFactory {
@@ -26,6 +28,12 @@ public class TestSimpleFactory {
         order.acceptOrder();
         order.processOrder();
         order.deliverOrder();
+    }
+    
+    @Test
+    public void testTeaEnum() {
+        TeaEnum[] teaEnums = TeaEnum.values();
+        assertEquals(3, teaEnums.length);
     }
 
 }
