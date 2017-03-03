@@ -19,6 +19,7 @@ public class ShapeFactoryTest {
     }
 
     @Test
+    // https://stackoverflow.com/questions/4512358/emma-coverage-on-enum-types/4548912#4548912
     public void testShapeEnum() {
         ShapeEnum[] shapeEnums = ShapeEnum.values();
         assertEquals(5, shapeEnums.length);
