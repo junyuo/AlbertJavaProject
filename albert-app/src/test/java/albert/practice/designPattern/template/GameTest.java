@@ -6,18 +6,18 @@ import org.junit.Test;
 public class GameTest {
 
     private Game pokeMonGo;
-    private Game spellTower;
+    private Game superMarioRun;
     
     @Before
     public void setup() {
         pokeMonGo = new PokeMonGo();
-        spellTower = new SpellTower();
+        superMarioRun = new SuperMarioRun();
     }
     
     @Test
     public void testGame() {
         pokeMonGo.play();
-        spellTower.play();
+        superMarioRun.play();
     }
     
 }

@@ -3,7 +3,7 @@ package albert.practice.designPattern.template;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class SpellTower extends Game {
+public class SuperMarioRun extends Game {
 
     @Override
     void initialize() {
