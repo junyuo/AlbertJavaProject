@@ -1,6 +1,6 @@
 package albert.practice.designPattern.strategy;
 
-public class OperationMultiply implements Strategy {
+public class OperationMultiply implements CalculationStrategy {
 
     @Override
     public int doOperation(int num1, int num2) {
