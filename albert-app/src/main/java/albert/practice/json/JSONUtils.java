@@ -2,6 +2,7 @@ package albert.practice.json;
 
 import java.io.IOException;
 
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import lombok.AllArgsConstructor;
@@ -38,7 +39,9 @@ public class JSONUtils {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Response {
+        @JsonProperty("Type")
         private String type;
+        @JsonProperty("Status")
         private String status;
     }
 }
