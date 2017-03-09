@@ -1,4 +1,4 @@
-package albert.practice.jackson;
+package albert.practice.json;
 
 import java.io.IOException;
 

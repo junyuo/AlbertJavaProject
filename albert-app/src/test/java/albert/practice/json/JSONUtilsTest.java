@@ -1,4 +1,4 @@
-package albert.practice.jackson;
+package albert.practice.json;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.meanbean.test.BeanTester;
 
+import albert.practice.json.JSONUtils;
 import lombok.extern.slf4j.Slf4j;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
