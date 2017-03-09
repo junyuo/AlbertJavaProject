@@ -10,7 +10,7 @@ public class GenericArrayTest {
 
         Integer[] intArray = {1, 2, 3, 4, 5};
         Double[] doubleArray = {1.2, 2.3, 3.4, 5.6};
-        String[] stringArray = {"´ú¸Õ", "«¢Åo"};
+        String[] stringArray = {"æ¸¬è©¦1", "æ¸¬è©¦2"};
         
         array.printArray(intArray);
         array.printArray(doubleArray);
