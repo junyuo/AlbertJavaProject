@@ -1,4 +1,4 @@
-package albert.practice.date;
+package albert.practice.datetime;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -8,6 +8,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import albert.practice.datetime.DateFormatExample;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

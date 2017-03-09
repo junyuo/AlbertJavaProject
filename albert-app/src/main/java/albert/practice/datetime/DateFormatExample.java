@@ -1,4 +1,4 @@
-package albert.practice.date;
+package albert.practice.datetime;
 
 import java.text.DateFormat;
 import java.text.ParseException;
