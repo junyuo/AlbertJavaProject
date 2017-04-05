@@ -17,22 +17,22 @@ public class FailSafeExample {
     @SuppressWarnings({"unchecked", "rawtypes"})
     public void setupConnectionWithRetry(ConnParams connParams) {
         RetryPolicy retryPolicy = new RetryPolicy();
-        retryPolicy.withDelay(3, TimeUnit.SECONDS).withMaxRetries(5);
+        retryPolicy.withDelay(3, TimeUnit.SECONDS).withMaxRetries(3);
 
         Failsafe.with(retryPolicy)
         .onSuccess(new CheckedConsumer() {
             @Override
             public void accept(Object t) throws Exception {
-                log.info("setup connection successfully! connParams = " + connParams.toString());
+                log.info("[onSuccess] setup connection successfully! connParams = " + connParams.toString());
             }
         })
         .onFailure(new CheckedConsumer() {
             @Override
             public void accept(Object t) throws Exception {
                 if (t instanceof Exception) {
-//                    Exception exception = (Exception) t;
-//                    log.error("fail to connect, exception = " + exception.getMessage()
-//                            + ", params = " + connParams.toString());
+                    Exception exception = (Exception) t;
+                    log.error("[onFailure] fail to connect, exception = " + exception.getMessage()
+                            + ", params = " + connParams.toString());
                 }
             }
         })
@@ -41,7 +41,7 @@ public class FailSafeExample {
             public void accept(Object t) throws Exception {
                 if (t instanceof Exception) {
                     Exception exception = (Exception) t;
-                    log.error("Reconnecting...., exception = " + exception.getMessage()
+                    log.error("[onFailedAttempt] Reconnecting...., exception = " + exception.getMessage()
                             + ", params = " + connParams.toString());
                 }
             }
@@ -60,7 +60,7 @@ public class FailSafeExample {
         .run(new CheckedRunnable() {
             @Override
             public void run() throws Exception {
-                log.info("connecting.....");
+                log.info("[run] connecting.....");
                 setupConnection(connParams);
             }
         });
