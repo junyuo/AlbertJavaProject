@@ -1,5 +1,6 @@
 package albert.practice.failsafe;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import lombok.extern.slf4j.Slf4j;
@@ -12,29 +13,29 @@ import net.jodah.failsafe.function.CheckedRunnable;
 
 @Slf4j
 public class FailSafeExample {
-
+    
     @SuppressWarnings({"unchecked", "rawtypes"})
     public void setupConnectionWithRetry(ConnParams connParams) {
         RetryPolicy retryPolicy = new RetryPolicy();
-        retryPolicy.withDelay(3, TimeUnit.SECONDS).withMaxRetries(3);
+        retryPolicy.withDelay(3, TimeUnit.SECONDS).withMaxRetries(5);
 
         Failsafe.with(retryPolicy)
-//        .onSuccess(new CheckedConsumer() {
-//            @Override
-//            public void accept(Object t) throws Exception {
-//                log.info("setup connection successfully");
-//            }
-//        })
-//        .onFailure(new CheckedConsumer() {
-//            @Override
-//            public void accept(Object t) throws Exception {
-//                if (t instanceof Exception) {
+        .onSuccess(new CheckedConsumer() {
+            @Override
+            public void accept(Object t) throws Exception {
+                log.info("setup connection successfully! connParams = " + connParams.toString());
+            }
+        })
+        .onFailure(new CheckedConsumer() {
+            @Override
+            public void accept(Object t) throws Exception {
+                if (t instanceof Exception) {
 //                    Exception exception = (Exception) t;
 //                    log.error("fail to connect, exception = " + exception.getMessage()
 //                            + ", params = " + connParams.toString());
-//                }
-//            }
-//        })
+                }
+            }
+        })
         .onFailedAttempt(new CheckedConsumer() {
             @Override
             public void accept(Object t) throws Exception {
@@ -44,17 +45,19 @@ public class FailSafeExample {
                             + ", params = " + connParams.toString());
                 }
             }
-        }).onComplete(new ContextualResultListener() {
+        })
+        .onComplete(new ContextualResultListener() {
             @Override
             public void onResult(Object result, Throwable failure, ExecutionContext context)
                     throws Exception {
                 if (failure == null) {
-                    log.info("get connection succesfully");
+//                    log.info("get connection succesfully");
                 } else {
-                    log.error("fail to get connection finally = " + failure.getMessage());
+//                    log.error("fail to get connection finally = " + failure.getMessage());
                 }
             }
-        }).run(new CheckedRunnable() {
+        })
+        .run(new CheckedRunnable() {
             @Override
             public void run() throws Exception {
                 log.info("connecting.....");
@@ -72,7 +75,14 @@ public class FailSafeExample {
     }
 
     public void setupConnection(ConnParams connParams ) throws ConnectionException {
-         throw new ConnectionException("Fail to setup connection");
+        Random random = new Random();
+        int n = random.nextInt(20);
+        log.debug("random number = " + n);
+        
+        // throw exception if number is even
+        if(n % 2 == 0) {
+            throw new ConnectionException("Fail to setup connection");
+        }
     }
 
 }
