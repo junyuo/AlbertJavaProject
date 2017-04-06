@@ -26,16 +26,16 @@ public class FailSafeExample {
                 log.info("[onSuccess] setup connection successfully! connParams = " + connParams.toString());
             }
         })
-        .onFailure(new CheckedConsumer() {
-            @Override
-            public void accept(Object t) throws Exception {
-                if (t instanceof Exception) {
-                    Exception exception = (Exception) t;
-                    log.error("[onFailure] fail to connect, exception = " + exception.getMessage()
-                            + ", params = " + connParams.toString());
-                }
-            }
-        })
+//        .onFailure(new CheckedConsumer() {
+//            @Override
+//            public void accept(Object t) throws Exception {
+//                if (t instanceof Exception) {
+//                    Exception exception = (Exception) t;
+//                    log.error("[onFailure] fail to connect, exception = " + exception.getMessage()
+//                            + ", params = " + connParams.toString());
+//                }
+//            }
+//        })
         .onFailedAttempt(new CheckedConsumer() {
             @Override
             public void accept(Object t) throws Exception {
