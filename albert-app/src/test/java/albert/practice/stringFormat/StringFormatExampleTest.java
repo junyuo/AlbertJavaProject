@@ -20,8 +20,8 @@ public class StringFormatExampleTest {
     @Before
     public void setup() {
         stringFormat = new StringFormatExample();
-        unformatedMessage = "ÅçÃÒ½X¶Ç°e¦¨¥\¡C¤â¾÷¸¹½X: {0}, Â²°T¤º®e¡GÅçÃÒ½X¬°¡G{1}";
-        anotherUnformatedMessage = "ÅçÃÒ½X¶Ç°e¥¢±Ñ¡A¥¢±Ñ­ì¦]¡G{1}¡C¤â¾÷¸¹½X: {0}";
+        unformatedMessage = "é©—è­‰ç¢¼å‚³é€æˆåŠŸã€‚æ‰‹æ©Ÿè™Ÿç¢¼: {0}, é©—æ•´ç¢¼: {1}";
+        anotherUnformatedMessage = "é©—è­‰ç¢¼å‚³é€å¤±æ•—ã€‚éŒ¯èª¤è¨Šæ¯: {1}, æ‰‹æ©Ÿè™Ÿç¢¼: {0}";
         phone = "0910123456";
         otp = "12345";
         error = "HTTP Server is down";
@@ -38,11 +38,11 @@ public class StringFormatExampleTest {
     public void testGetFormattedMessage() {
         String formatedMsg = stringFormat.getFormattedMessage(unformatedMessage, phone, otp);
         log.debug("formatedMsg = " + formatedMsg);
-        assertEquals("ÅçÃÒ½X¶Ç°e¦¨¥\¡C¤â¾÷¸¹½X: 0910123456, Â²°T¤º®e¡GÅçÃÒ½X¬°¡G12345", formatedMsg);
+        assertEquals("é©—è­‰ç¢¼å‚³é€æˆåŠŸã€‚æ‰‹æ©Ÿè™Ÿç¢¼: 0910123456, é©—æ•´ç¢¼: 12345", formatedMsg);
         
         String anotherFormatedMsg = stringFormat.getFormattedMessage(anotherUnformatedMessage, phone, error);
         log.debug("anotherFormatedMsg = " + anotherFormatedMsg);
-        assertEquals("ÅçÃÒ½X¶Ç°e¥¢±Ñ¡A¥¢±Ñ­ì¦]¡GHTTP Server is down¡C¤â¾÷¸¹½X: 0910123456", anotherFormatedMsg);
+        assertEquals("é©—è­‰ç¢¼å‚³é€å¤±æ•—ã€‚éŒ¯èª¤è¨Šæ¯: HTTP Server is down, æ‰‹æ©Ÿè™Ÿç¢¼: 0910123456", anotherFormatedMsg);
     }
 
 }
