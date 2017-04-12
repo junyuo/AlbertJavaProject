@@ -7,17 +7,17 @@ public class OolongTea extends Order {
 
     @Override
     public void acceptOrder() {
-        log.debug("±µ¨ü­q³æ¡A¶¼®Æ¦WºÙ: ¯QÀs¯ù");
+        log.debug("æ¥å—çƒé¾èŒ¶è¨‚å–®");
     }
 
     @Override
     public void processOrder() {
-        log.debug("³B²z­q³æ¡A¶¼®Æ¦WºÙ: ¯QÀs¯ù");
+        log.debug("è™•ç†çƒé¾èŒ¶è¨‚å–®");
     }
 
     @Override
     public void deliverOrder() {
-        log.debug("¥æ¥I­q³æ¡A¶¼®Æ¦WºÙ: ¯QÀs¯ù");
+        log.debug("éäº¤çƒé¾èŒ¶è¨‚å–®");
     }
 
 }

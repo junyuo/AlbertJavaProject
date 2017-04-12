@@ -7,17 +7,17 @@ public class GreenTea extends Order {
 
     @Override
     public void acceptOrder() {
-        log.debug("±µ¨ü­q³æ¡A¶¼®Æ¦WºÙ: ºñ¯ù");
+        log.debug("æ¥å—ç¶ èŒ¶è¨‚å–®");
     }
 
     @Override
     public void processOrder() {
-        log.debug("³B²z­q³æ¡A¶¼®Æ¦WºÙ: ºñ¯ù");
+        log.debug("è™•ç†ç¶ èŒ¶è¨‚å–®");
     }
 
     @Override
     public void deliverOrder() {
-        log.debug("¥æ¥I­q³æ¡A¶¼®Æ¦WºÙ: ºñ¯ù");
+        log.debug("éäº¤ç¶ èŒ¶è¨‚å–®");
     }
 
 }
