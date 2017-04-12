@@ -6,7 +6,9 @@ import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import net.jodah.failsafe.ExecutionContext;
 import net.jodah.failsafe.Failsafe;
+import net.jodah.failsafe.FailsafeConfig;
 import net.jodah.failsafe.RetryPolicy;
+import net.jodah.failsafe.SyncFailsafe;
 import net.jodah.failsafe.event.ContextualResultListener;
 import net.jodah.failsafe.function.CheckedConsumer;
 import net.jodah.failsafe.function.CheckedRunnable;
@@ -19,7 +21,7 @@ public class FailSafeExample {
         RetryPolicy retryPolicy = new RetryPolicy();
         retryPolicy.withDelay(3, TimeUnit.SECONDS).withMaxRetries(3);
 
-        Failsafe.with(retryPolicy)
+        ((FailsafeConfig<Object, SyncFailsafe<Object>>) Failsafe.with(retryPolicy)
         .onSuccess(new CheckedConsumer() {
             @Override
             public void accept(Object t) throws Exception {
@@ -45,7 +47,7 @@ public class FailSafeExample {
                             + ", params = " + connParams.toString());
                 }
             }
-        })
+        }))
         .onComplete(new ContextualResultListener() {
             @Override
             public void onResult(Object result, Throwable failure, ExecutionContext context)
