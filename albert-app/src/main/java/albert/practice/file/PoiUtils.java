@@ -13,6 +13,7 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.WorkbookUtil;
 import org.apache.poi.xssf.usermodel.XSSFRichTextString;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -28,12 +29,12 @@ public class PoiUtils {
 		String safeName = WorkbookUtil.createSafeSheetName(expectedSheetName);
 		Sheet sheet = wb.createSheet(safeName);
 		try {
-			
+
 			CellStyle popStyle = createPopStyle(wb);
-			
+
 			int rowNum = 0;
 			Row row = createHeader(sheet, rowNum);
-			
+
 			// create data row
 			for (List<String> arr : list) {
 				rowNum++;
@@ -43,7 +44,7 @@ public class PoiUtils {
 				row.createCell(2).setCellValue(fmt.parse(arr.get(2)).intValue());
 				row.createCell(3).setCellValue(Double.parseDouble(arr.get(3)));
 				row.createCell(4).setCellValue(arr.get(4));
-				
+
 				row.getCell(2).setCellStyle(popStyle);
 
 				int start = sheet.getRow(rowNum).getFirstCellNum();
@@ -63,7 +64,7 @@ public class PoiUtils {
 
 	private CellStyle createPopStyle(Workbook wb) {
 		CellStyle popStyle = wb.createCellStyle();
-		short format = (short)BuiltinFormats.getBuiltinFormat("#,##0");
+		short format = (short) BuiltinFormats.getBuiltinFormat("#,##0");
 		popStyle.setDataFormat(format);
 		return popStyle;
 	}
@@ -81,6 +82,17 @@ public class PoiUtils {
 		CellStyle style = sheet.getWorkbook().createCellStyle();
 		style.setWrapText(true);
 		row.getCell(2).setCellStyle(style);
+
+		// add filter headers
+		int start = sheet.getRow(0).getFirstCellNum();
+		int end = sheet.getRow(0).getLastCellNum();
+		for (int i = start; i < end; i++) {
+			CellRangeAddress ca = new CellRangeAddress(0, rowNum, start, end);
+			sheet.setAutoFilter(ca);
+		}
+		
+		// freeze the first row
+		sheet.createFreezePane(0, 1);
 
 		return row;
 	}
