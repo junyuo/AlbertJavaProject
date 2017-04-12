@@ -1,34 +1,41 @@
 package albert.practice.file;
 
-import java.io.IOException;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
-
-import albert.practice.file.PoiUtils;
 
 public class PoiUtilsTest extends PoiUtils {
 
 	private String expectedSheetName;
 	private String destName;
-	private List<List<String>> list;
+	private List<DataBean> list;
 
 	@Before
 	public void setup() {
 		expectedSheetName = "測試";
 		destName = "D:/dropbox/test.xlsx";
-		list = Arrays.asList(Arrays.asList("1", "China", "1,378,020,000", "147.75", "2016"),
-				Arrays.asList("2", "India", "1,266,884,000", "426.10", "2016 WFB"),
-				Arrays.asList("3", "United States of America", "323,128,000", "35.32", "2016"),
-				Arrays.asList("4", "Indonesia", "257,453,000", "142.12", "2016"),
-				Arrays.asList("5", "Brazil", "206,081,000", "24.66", "2016"));
+
+		DataBean bean1 = new DataBean(1, "China", 1378020000, 147.75, addDays(new Date(), 30));
+		DataBean bean2 = new DataBean(2, "India", 1266884000, 426.1, addDays(new Date(), -30));
+		DataBean bean3 = new DataBean(3, "United States of America", 323128000, 35.32, addDays(new Date(), 50));
+		DataBean bean4 = new DataBean(4, "Indonesia", 257453000, 142.12, addDays(new Date(), -50));
+		DataBean bean5 = new DataBean(5, "Brazil", 2060810000, 24.66, addDays(new Date(), 80));
+
+		list = Arrays.asList(bean1, bean2, bean3, bean4, bean5);
 	}
 
 	@Test
 	public void testWriteXlsx() throws Exception {
 		writeXlsx(expectedSheetName, destName, list);
+	}
+
+	private Date addDays(Date date, int days) {
+		DateTime datetime = new DateTime(date);
+		return datetime.plusDays(days).toDate();
 	}
 
 }

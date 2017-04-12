@@ -3,8 +3,11 @@ package albert.practice.file;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -18,32 +21,38 @@ import org.apache.poi.ss.util.WorkbookUtil;
 import org.apache.poi.xssf.usermodel.XSSFRichTextString;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import lombok.AllArgsConstructor;
 import lombok.Cleanup;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 public class PoiUtils {
 
 	private NumberFormat fmt = NumberFormat.getInstance(Locale.US);
-
-	public void writeXlsx(String expectedSheetName, String destName, List<List<String>> list) throws Exception {
+    private DateFormat datefmt = new SimpleDateFormat("yyyy-MM-dd");
+    
+	public void writeXlsx(String expectedSheetName, String destName, List<DataBean> list) throws Exception {
 		Workbook wb = new XSSFWorkbook();
 		String safeName = WorkbookUtil.createSafeSheetName(expectedSheetName);
 		Sheet sheet = wb.createSheet(safeName);
 		try {
 
 			CellStyle popStyle = createPopStyle(wb);
-
+			
+			
 			int rowNum = 0;
 			Row row = createHeader(sheet, rowNum);
 
 			// create data row
-			for (List<String> arr : list) {
+			for (DataBean data : list) {
 				rowNum++;
 				row = sheet.createRow(rowNum);
-				row.createCell(0).setCellValue(Integer.parseInt(arr.get(0)));
-				row.createCell(1).setCellValue(arr.get(1));
-				row.createCell(2).setCellValue(fmt.parse(arr.get(2)).intValue());
-				row.createCell(3).setCellValue(Double.parseDouble(arr.get(3)));
-				row.createCell(4).setCellValue(arr.get(4));
+				row.createCell(0).setCellValue(data.getRank());
+				row.createCell(1).setCellValue(data.getCountry());
+				row.createCell(2).setCellValue(fmt.parse(Long.toString(data.getTotal())).longValue());
+				row.createCell(3).setCellValue(data.getSqKm());
+				row.createCell(4).setCellValue(datefmt.format(data.getDate()));
 
 				row.getCell(2).setCellStyle(popStyle);
 
@@ -95,6 +104,18 @@ public class PoiUtils {
 		sheet.createFreezePane(0, 1);
 
 		return row;
+	}
+	
+	@AllArgsConstructor
+	@NoArgsConstructor
+	@Data
+	@ToString
+	public static class DataBean {
+		private int rank;
+		private String country;
+		private long total;
+		private double sqKm;
+		private Date date;
 	}
 
 }
