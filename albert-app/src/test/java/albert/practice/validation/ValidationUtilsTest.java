@@ -32,8 +32,8 @@ public class ValidationUtilsTest extends ValidationUtils {
 
     @Test
     public void testIsHtmlValid() throws UnsupportedEncodingException {
-        assertTrue(isHtmlValid(html1.toString()) == Boolean.TRUE);
-        assertTrue(isHtmlValid(html2.toString()) == Boolean.TRUE);
+        assertTrue(isHtmlValid(html1.toString()).getErrors() == 0);
+        assertTrue(isHtmlValid(html2.toString()).getErrors() == 0);
     }
     
 }
