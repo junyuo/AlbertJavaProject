@@ -31,8 +31,19 @@ public class ValidationUtils {
 	@Getter
 	@Builder
 	public static class ResultBean {
+		/**
+		 * pretty-printed document
+		 */
 		private String htmlStr;
+		
+		/**
+		 * number of errors that occurred in the most recent parse operation.
+		 */
 		private int errors;
+		
+		/**
+		 * number of warnings that occurred in the most recent parse operation
+		 */
 		private int warnings;
 	}
 
