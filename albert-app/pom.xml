@@ -154,5 +154,12 @@
 			<version>${joda-time.version}</version>
 		</dependency>
 
+		<!-- check html format -->
+		<dependency>
+			<groupId>net.sf.jtidy</groupId>
+			<artifactId>jtidy</artifactId>
+			<version>r938</version>
+		</dependency>
+
 	</dependencies>
 </project>
