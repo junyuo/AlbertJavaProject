@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 public class ValidationUtils {
 
     public static Boolean isHtmlValid(String htmlString) throws UnsupportedEncodingException {
-        log.debug("htmlString = " + htmlString);
         Boolean isValid = Boolean.FALSE;
 
         Tidy tidy = new Tidy();
