@@ -13,11 +13,12 @@ import albert.practice.mapStruct.decorator.NameDecorator;
 @Mapper
 @DecoratedWith(NameDecorator.class)
 public interface AddressMapper {
-	
-	AddressMapper INSTANCE = Mappers.getMapper( AddressMapper.class );
+	// By convention, a mapper interface should define a member called INSTANCE
+	// which holds a single instance of the mapper type:
+	AddressMapper INSTANCE = Mappers.getMapper(AddressMapper.class);
 
 	@Mapping(target = "receiver", source = "person.lastName")
 	@Mapping(target = "addressString", source = "address.addressString")
 	DeliveryAddressDto covertPersonAndAddressToDeliveryAddressDto(Person person, Address address);
-	
+
 }

@@ -1,5 +1,7 @@
 package albert.practice.mapStruct;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mapstruct.factory.Mappers;
@@ -22,7 +24,8 @@ public class AddressMapperTest {
 		Person person = new Person("Albert", "Kuo");
 		Address address = new Address("No.7, Sec. 5, Xinyi Rd., Xinyi Dist., Taipei City 110, Taiwan (R.O.C.) ");
 		DeliveryAddressDto deliveryDto = addressMapper.covertPersonAndAddressToDeliveryAddressDto(person, address);
-		log.debug("deliveryDto = " + deliveryDto.toString());
+		assertTrue("Albert Kuo".equals(deliveryDto.getReceiver()));
+		assertTrue("No.7, Sec. 5, Xinyi Rd., Xinyi Dist., Taipei City 110, Taiwan (R.O.C.) ".equals(deliveryDto.getAddressString()));
 	}
 
 }
