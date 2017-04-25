@@ -21,7 +21,7 @@ public interface AddressMapper {
 	@Mapping(target = "totalString", source = "shoppingItems.total")
 	@Mapping(target = "receiver", source = "person.lastName")
 	@Mapping(target = "addressString", source = "address.addressString")
-	DeliveryAddressDto covertPersonAndAddressToDeliveryAddressDto(Person person, Address address, ShoppingItems shoppingItems);
+	DeliveryAddressDto covertPersonAndAddressToDeliveryAddressDto(Person person, Address address,
+			ShoppingItems shoppingItems);
 
-	
 }

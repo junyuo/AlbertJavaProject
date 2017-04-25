@@ -11,7 +11,7 @@ import albert.practice.mapStruct.mapper.AddressMapper;
 public class AddressDecorator implements AddressMapper {
 
 	private final AddressMapper delegate;
-	private DecimalFormat decimalFormat = new DecimalFormat( "NT$#,###,###,##0" );
+	private DecimalFormat decimalFormat = new DecimalFormat("NT$#,###,###,##0");
 
 	public AddressDecorator(AddressMapper delegate) {
 		this.delegate = delegate;
