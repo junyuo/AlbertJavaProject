@@ -9,8 +9,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class DeliveryAddressDto {
-	private String receiver;
-	private String addressString;
-	private String totalString;
+public class ShoppingItems {
+	private Long total;
 }
