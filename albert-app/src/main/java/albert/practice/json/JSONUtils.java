@@ -2,6 +2,7 @@ package albert.practice.json;
 
 import java.io.IOException;
 
+import org.codehaus.jackson.JsonParser.Feature;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -14,6 +15,7 @@ public class JSONUtils {
 
     public Response convertJsonToObject(String json) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER, true);
         Response response = null;
         try {
             response = mapper.readValue(json, Response.class);
