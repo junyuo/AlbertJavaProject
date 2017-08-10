@@ -1,4 +1,7 @@
 <factorypath>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/google/inject/guice/4.1.0/guice-4.1.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/javax/inject/javax.inject/1/javax.inject-1.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/projectlombok/lombok/1.16.18/lombok-1.16.18.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/slf4j/slf4j-api/1.7.21/slf4j-api-1.7.21.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/ch/qos/logback/logback-core/1.1.7/logback-core-1.1.7.jar" enabled="true" runInBatchMode="false"/>
@@ -18,7 +21,6 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/spring-tx/4.2.4.RELEASE/spring-tx-4.2.4.RELEASE.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/retry/spring-retry/1.1.2.RELEASE/spring-retry-1.1.2.RELEASE.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/spring-aop/4.2.4.RELEASE/spring-aop-4.2.4.RELEASE.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/spring-context/4.2.4.RELEASE/spring-context-4.2.4.RELEASE.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/spring-expression/4.2.4.RELEASE/spring-expression-4.2.4.RELEASE.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/spring-messaging/4.2.4.RELEASE/spring-messaging-4.2.4.RELEASE.jar" enabled="true" runInBatchMode="false"/>
