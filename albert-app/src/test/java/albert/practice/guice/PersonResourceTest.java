@@ -23,8 +23,9 @@ public class PersonResourceTest {
 	
 	@Test
 	public void testGetContacts() {
-		List<Contact> contacts = personResouce.getContacts("testId");
+		List<Contact> contacts = personResouce.getContacts("123");
 		contacts.stream().forEach(c -> log.debug(c.toString()));
+		
 		assertEquals(3, contacts.size());
 	}
 }

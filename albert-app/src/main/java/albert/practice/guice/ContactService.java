@@ -3,10 +3,12 @@ package albert.practice.guice;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
+import com.google.inject.Singleton;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Singleton
 public class ContactService {
 
 	public List<Contact> getContacts(String id) {
