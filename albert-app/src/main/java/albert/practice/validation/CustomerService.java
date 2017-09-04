@@ -10,10 +10,12 @@ import javax.validation.Validator;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
+import com.google.inject.Singleton;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Singleton
 public class CustomerService {
 
 	public void create(Customer customer) {
