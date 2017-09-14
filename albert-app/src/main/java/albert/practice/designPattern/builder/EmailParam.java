@@ -24,18 +24,18 @@ public class EmailParam {
 
 	@Getter
 	@NotNull(message = "請提供收件者 email")
-	private List<String> receiverEmails; // 收件者 (必填)
+	private List<String> receiverEmails;
 
 	@Getter
 	@NotEmpty(message = "主旨不可為空")
-	private String subject; // 主旨 (必填)
+	private String subject; 
 
 	@Getter
 	@NotEmpty(message = "內文不可為空")
-	private String content; // 內文 (必填)
+	private String content; 
 
 	@Getter
-	private List<File> attachments; // 附加檔案 (非必填)
+	private List<File> attachments; 
 
 	private EmailParam(Builder builder) {
 		this.receiverEmails = builder.receiverEmails;
@@ -46,10 +46,10 @@ public class EmailParam {
 
 	public static class Builder {
 
-		private List<String> receiverEmails; // 收件者 (必填)
+		private List<String> receiverEmails; 
 		private String subject;
 		private String content;
-		private List<File> attachments; // 附加檔案 (非必填)
+		private List<File> attachments; 
 
 		public Builder receivers(List<String> receiverEmails) {
 			this.receiverEmails = receiverEmails;
