@@ -41,7 +41,7 @@ public class EmailParam {
 		this.receiverEmails = builder.receiverEmails;
 		this.subject = builder.subject;
 		this.content = builder.content;
-		this.attachments = attachments;
+		this.attachments = builder.attachments;
 	}
 
 	public static class Builder {
