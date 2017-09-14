@@ -21,7 +21,7 @@
 
 
 	<dependencies>
-		<!-- validation start  -->
+		<!-- validation start -->
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
@@ -38,6 +38,12 @@
 			<groupId>org.glassfish</groupId>
 			<artifactId>javax.el</artifactId>
 			<version>3.0.1-b08</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-validator</groupId>
+			<artifactId>commons-validator</artifactId>
+			<version>1.6</version>
 		</dependency>
 		<!-- validation end -->
 
