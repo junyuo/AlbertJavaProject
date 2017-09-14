@@ -4,17 +4,7 @@ import java.util.Date;
 
 import org.apache.commons.validator.routines.DateValidator;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 public class DateUtils {
-
-	public static void main(String[] args) {
-		DateUtils.validateDate("2017/9/30");
-		log.debug(DateUtils.convertToDate("2017/9/30").toString());
-		log.debug(DateUtils.convertToString(new Date(), "yyyy/MM/dd"));
-		DateUtils.compareDays(DateUtils.convertToDate("2017/9/30"), DateUtils.convertToDate("2017/9/30"));
-	}
 
 	/**
 	 * 檢查 date string 格式是否符合 yyyy/MM/dd 格式.
