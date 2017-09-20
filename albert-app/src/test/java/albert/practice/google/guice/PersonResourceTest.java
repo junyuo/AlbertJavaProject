@@ -1,4 +1,4 @@
-package albert.practice.guice;
+package albert.practice.google.guice;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,6 +9,8 @@ import org.junit.Test;
 
 import com.google.inject.Guice;
 
+import albert.practice.guice.Contact;
+import albert.practice.guice.PersonResource;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
