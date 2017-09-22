@@ -1,4 +1,4 @@
-package albert.practice.oop.polymorphism;
+package albert.practice.oop.polymorphism.animal;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,9 +13,9 @@ public class Dog implements Animal {
 		log.info("Dog is running");
 	}
 
-	public static void main(String[] args) {
-		Animal dog = new Dog();
-		dog.run();
+	@Override
+	public void makeNoise() {
+		log.info("汪汪~");		
 	}
 
 }

@@ -1,4 +1,4 @@
-package albert.practice.oop.polymorphism;
+package albert.practice.oop.polymorphism.animal;
 
 /**
  * Polymorphism is the ability of an object to take on many forms. The most
@@ -12,5 +12,6 @@ package albert.practice.oop.polymorphism;
 public interface Animal {
 
 	public void run();
+	public void makeNoise();
 
 }
